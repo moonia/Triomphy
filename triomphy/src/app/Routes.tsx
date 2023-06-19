@@ -1,12 +1,12 @@
-import React from 'react'
 import { BrowserRouter, Route, Routes as RouterRoutes } from 'react-router-dom';
 import Login from '../pages/Login';
-import { Box, Image, Flex, Text, Stack, Input } from '@chakra-ui/react'
+import Register from '../pages/Register';
 
 const Routes = (): JSX.Element => (
 	<BrowserRouter>
 		<RouterRoutes>
       		<Route path="/login" element={<Login />} />
+			<Route path="/register" element={<Register />} />
 		</RouterRoutes>
 	</BrowserRouter>
 );
