@@ -20,6 +20,7 @@ export class UserController {
   async createUser(@Res() response, @Body() createUserDto: CreateUserDto) {
     try {
       const newUser = await this.userService.createUser(createUserDto);
+      console.log('mon user: ', newUser);
       return response.status(HttpStatus.CREATED).json({
         message: 'User has been created successfully',
         newUser,
@@ -28,7 +29,7 @@ export class UserController {
       return response.status(HttpStatus.BAD_REQUEST).json({
         statusCode: 400,
         message: 'Error: User not created!',
-        error: 'Bad Request',
+        error: err.message,
       });
     }
   }
