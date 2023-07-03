@@ -1,8 +1,34 @@
 import register_image from "../ressource/register_image.jpg";
 import logo from "../ressource/logo.png";
 import { FcGoogle } from "react-icons/fc";
+import axios from "axios";
 
 export default function Register() {
+  const postUser = async () => {
+    const input_name = (document.getElementById("name") as HTMLInputElement)
+    const input_username = (document.getElementById("username") as HTMLInputElement)
+    const input_email = (document.getElementById("email") as HTMLInputElement)
+    const input_password = (document.getElementById("password") as HTMLInputElement)
+
+    if (!input_name.value || !input_username.value || !input_email.value || !input_password.value) {
+      alert("Please fill all the fields")
+      return
+    }
+
+    const user = {
+      name: input_name.value,
+      username: input_username.value,
+      email: input_email.value,
+      password: input_password.value,
+    };
+
+    await axios
+      .post("http://127.0.0.1:3000/user", user)
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <div className="flex bg-white flex-col h-screen lg:flex-row">
@@ -25,6 +51,7 @@ export default function Register() {
                   <span className="label-text text-black"> Name </span>
                 </label>
                 <input
+                  id="name"
                   type="text"
                   placeholder="Type your name ..."
                   className="input input-ghost border-0 border-b-2 rounded-none border-gray-200 bg-transparent focus:outline-none focus:text-black"
@@ -37,6 +64,7 @@ export default function Register() {
                   <span className="label-text text-black"> Username </span>
                 </label>
                 <input
+                  id="username"
                   type="text"
                   placeholder="Type your username ..."
                   className="input input-ghost border-0 border-b-2 rounded-none border-gray-200 bg-transparent focus:outline-none focus:text-black"
@@ -49,6 +77,7 @@ export default function Register() {
               <span className="label-text text-black"> Email </span>
             </label>
             <input
+              id="email"
               type="text"
               placeholder="Type your email ..."
               className="input input-ghost border-0 border-b-2 rounded-none border-gray-200 bg-transparent focus:outline-none focus:text-black"
@@ -59,13 +88,17 @@ export default function Register() {
               <span className="label-text text-black"> Password </span>
             </label>
             <input
+              id="password"
               type="text"
               placeholder="Type your password ..."
               className="input input-ghost border-0 border-b-2 rounded-none border-gray-200 bg-transparent focus:outline-none focus:text-black"
             />
           </div>
           <div className="form-control w-full max-w-xl mt-10">
-            <button className="btn btn-active text-white"> Sign up </button>
+            <button onClick={postUser} className="btn btn-active text-white">
+              {" "}
+              Sign up{" "}
+            </button>
           </div>
         </div>
 
