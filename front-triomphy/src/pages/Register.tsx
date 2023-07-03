@@ -5,22 +5,22 @@ import axios from "axios";
 
 export default function Register() {
   const postUser = async () => {
-    const input_name = (document.getElementById("name") as HTMLInputElement)
-    const input_username = (document.getElementById("username") as HTMLInputElement)
-    const input_email = (document.getElementById("email") as HTMLInputElement)
-    const input_password = (document.getElementById("password") as HTMLInputElement)
-
-    if (!input_name.value || !input_username.value || !input_email.value || !input_password.value) {
-      alert("Please fill all the fields")
-      return
-    }
-
-    const user = {
-      name: input_name.value,
-      username: input_username.value,
-      email: input_email.value,
-      password: input_password.value,
+    const user: {
+      name: string;
+      username: string;
+      email: string;
+      password: string;
+    } = {
+      name: (document.getElementById("name") as HTMLInputElement).value,
+      username: (document.getElementById("username") as HTMLInputElement).value,
+      email: (document.getElementById("email") as HTMLInputElement).value,
+      password: (document.getElementById("password") as HTMLInputElement).value,
     };
+
+    if (!user.name || !user.username || !user.email || !user.password) {
+      alert("Please fill all the fields");
+      return;
+    }
 
     await axios
       .post("http://127.0.0.1:3000/user", user)
